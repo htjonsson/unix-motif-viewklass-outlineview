@@ -12,14 +12,14 @@ BIN_DIR  	:= ./target
 BINARY   	:= target.app
 INCLUDE  	:= -I${VK_INC} -I/usr/X11R6/include -I/usr/include/freetype2 -I./Component -I.
 SRC      	:= $(wildcard *.C) 
-SRCS		:= 	main.C \
-				Component/OutlineView.C \
-				Component/OutlineViewDelegate.C \
-				Component/OutlineViewRenderNode.C \
-				Component/OutlineViewNode.C \
-				EZ/Graphics.C \
-				EZ/EZ.C
-OBJECTS  	:= $(SRCS:%.C=$(OBJ_DIR)/%.o)
+SRCS		:= 	main.cpp \
+				Outline/OutlineView.cpp \
+				Outline/OutlineDelegate.cpp \
+				Outline/OutlineNode.cpp \
+				Outline/OutlineDatasource.cpp \
+				EZ/Graphics.cpp \
+				EZ/EZ.cpp
+OBJECTS  	:= $(SRCS:%.cpp=$(OBJ_DIR)/%.o)
 
 all: build $(BIN_DIR)/$(BINARY)
 

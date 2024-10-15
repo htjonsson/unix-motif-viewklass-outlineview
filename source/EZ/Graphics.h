@@ -20,7 +20,7 @@ public:
      ~Graphics();
 
 public:
-     void setWidget(Widget widget);
+     void useWith(Widget widget);
      Widget widget();
      GC gc();
      Window window();
