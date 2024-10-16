@@ -1,7 +1,7 @@
 {
     "files.associations": {
         "OutlineView.C": "cpp",
-        "OutlineViewDelegate.C": "cpp",
+        "OutlineDelegate.C": "cpp",
         "main.C": "cpp",
         "EZ.C": "cpp",
         "Graphics.C": "cpp",

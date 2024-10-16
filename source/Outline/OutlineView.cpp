@@ -15,7 +15,10 @@ using namespace std;
 OutlineView::OutlineView(const char *name, Widget parent)
     : VkComponent(name)
 {
-    setDelegate(new OutlineViewDelegate());
+    setDelegate(new OutlineDelegate());
+    setDatasource(new OutlineDatasource());
+    setNumberOfRows(datasource()->numberOfRows());
+    
     createWidget(name, parent);    
 }
 
@@ -85,19 +88,19 @@ void OutlineView::createWidget(const char *name, Widget parent)
 // ------------------------------------------------------------------------------------------------------------------------
 
 void 
-OutlineView::setDelegate(OutlineViewDelegate *delegate)
+OutlineView::setDelegate(OutlineDelegate *delegate)
 {
     _delegate = delegate;
 }
 
-OutlineViewDelegate*
+OutlineDelegate*
 OutlineView::delegate()
 {
     return _delegate;
 }
 
 void 
-OutlineView::setDelegate(OutlineDatasource* datasource)
+OutlineView::setDatasource(OutlineDatasource* datasource)
 {
     _datasource = datasource;
 }
@@ -128,7 +131,7 @@ OutlineView::setNumberOfRows(int numberOfRows)
 void
 OutlineView::update()
 {
-    setNumberOfRows(_datasource->numberOfRows);  
+    setNumberOfRows(_datasource->numberOfRows());  
 }
 
 // ------------------------------------------------------------------------------------------------------------------------
@@ -216,7 +219,7 @@ OutlineView::redraw(Window window)
     {
         int rowId = i + (_offsetRows); 
 
-        if (_datasource != null && nodes.size() > rowId)
+        if (_datasource != NULL && nodes.size() > rowId)
         {   
             int offset = (hightOfRow + _separatorHeight) * i;
 
@@ -227,7 +230,7 @@ OutlineView::redraw(Window window)
             }
 
             XRectangle rectangle = EZ::makeRectangle(6, offset, _rowWidth-12, hightOfRow-_separatorHeight);
-            _delegate->draw(node, &graphics, rectangle);
+            _delegate->draw(nodes.at(rowId), &graphics, rectangle);
         }     
     }
 }
@@ -244,7 +247,7 @@ OutlineView::getRowIdByY(int y)
     {
         int rowId = i + (_offsetRows); 
 
-        if (_datasource->size() > rowId)
+        if (_datasource->numberOfRows() > rowId)
         {   
             int offset = (hightOfRow + _separatorHeight) * i;
 
@@ -335,9 +338,11 @@ OutlineView::handleEvent(XEvent* event)
 void 
 OutlineView::handleButton1Pressed(XButtonPressedEvent* event)
 {
-    // cout << "handleButton1Pressed" << " y: " << event->y << endl;    
+    cout << "handleButton1Pressed" << " y: " << event->y << endl;    
 
     int rowId = getRowIdByY(event->y);
+
+    cout << "handleButton1Pressed" << " rowId: " << rowId<< endl;  
 
     setSelectedRow(rowId);
 
@@ -345,6 +350,8 @@ OutlineView::handleButton1Pressed(XButtonPressedEvent* event)
     {
         std::vector<OutlineNode*> nodes;
         _datasource->listOfVisible(&nodes);
+
+        cout << "handleButton1Pressed" << " nodes: " << nodes.size()<< endl;  
 
         if (rowId < nodes.size())
         {

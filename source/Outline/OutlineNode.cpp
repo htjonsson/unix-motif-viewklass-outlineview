@@ -1,19 +1,21 @@
 #include "OutlineNode.h"
 
-OutlineNode::OutlineNode(int level, std::string label);
-	: OutlineNode(level, label, label)
-{}
 
-OutlineNode::OutlineNode(int level, std::string label, std::string text)
+
+OutlineNode::OutlineNode(int level, std::string name, std::string label)
 {
 	_level = level;
 	_label = label;
-	_text = text;
+	_name = name;
     _hasChildren = false;
 
 	if (_level == 0)
-		isVisible = true;
+		_visible = true;
 }
+
+OutlineNode::OutlineNode(int level, std::string name)
+	: OutlineNode(level, name, name)
+{}
 
 OutlineNode::~OutlineNode()
 {}
@@ -30,6 +32,12 @@ void
 OutlineNode::setVisible(bool isVisible)
 {
 	_visible = isVisible;
+}
+
+std::string 
+OutlineNode::label()
+{
+	return _label;
 }
 
 int 
@@ -54,12 +62,6 @@ void
 OutlineNode::setExtended(bool isExtended = true)
 {
 	_expanded = isExtended;
-}
-
-std::string
-OutlineNode::label()
-{
-	return _label;
 }
 
 std::string

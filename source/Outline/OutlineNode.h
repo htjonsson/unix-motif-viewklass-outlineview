@@ -1,7 +1,7 @@
 #ifndef OUTLINE_NODE_H
 #define OUTLINE_NODE_H
 
-#include <Xm/Xn.h>
+#include <Xm/Xm.h>
 
 #include <vector>
 #include <string>
@@ -12,14 +12,15 @@ private:
 	std::string 	_name;
 	std::string 	_label;
 	bool 			_expanded = false;
-	XtPointer		_clientData = null;
+	XtPointer		_clientData = NULL;
 	bool			_visible = false;
 	int  			_level = 0;
-    bool            __hasChildren = false;
+    bool            _hasChildren = false;
+	OutlineNode*	_parent;
 
 public:
-	OutlineNode(int level, std::string label);
-	OutlineNode(int level, std::string label, std::string text);
+	OutlineNode(int level, std::string name);
+	OutlineNode(int level, std::string name, std::string label);
 	~OutlineNode();
 
 public:
@@ -37,6 +38,12 @@ public:
 public:
 	bool isVisible();
 	void setVisible(bool isVisible);
+
+public:
+	std::string label();
+
+public:
+	std::string name();
 
 public:
 	int level();

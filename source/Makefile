@@ -23,7 +23,7 @@ OBJECTS  	:= $(SRCS:%.cpp=$(OBJ_DIR)/%.o)
 
 all: build $(BIN_DIR)/$(BINARY)
 
-$(OBJ_DIR)/%.o: %.C
+$(OBJ_DIR)/%.o: %.cpp
 	@mkdir -p $(@D)
 	$(CC) $(CCFLAGS) $(INCLUDE) -c $< -o $@ $(LDFLAGS)
 

@@ -13,10 +13,10 @@ private:
 
 public:
 	void add(OutlineNode* child);
-	void add(OutlineNode* parent, OutlilneNode* child);
+	void add(OutlineNode* parent, OutlineNode* child);
 
 public:
-	int listOfVisible(vector<OutlineNode*> result);
+	int listOfVisible(std::vector<OutlineNode*>* result);
 
 private:
 	int indexOf(OutlineNode* node);
@@ -32,6 +32,9 @@ public:
 
 public:
     int numberOfRows();
+
+public:
+	void update();
 };
 
 #endif // OUTLINE_VIEW_H

@@ -40,12 +40,12 @@ private:
   void createWidget(const char *name, Widget parent);  
 
 public:
-    void setDelegate(OutlineDatasource* datasource);
+    void setDatasource(OutlineDatasource* datasource);
     OutlineDatasource* datasource();
 
 public:
-    void setDatasource(OutlineViewDelegate* delegate);
-    OutlineViewDelegate* delegate();
+    void setDelegate(OutlineDelegate* delegate);
+    OutlineDelegate* delegate();
 
 public:
     void setNumberOfRows(int numberOfRows);

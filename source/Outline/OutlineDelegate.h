@@ -1,21 +1,21 @@
 #ifndef OUTLINE_DELEGATE_H
 #define OUTLINE_DELEGATE_H
 
-#include "OutlineViewRenderNode.h"
-
+#include "OutlineNode.h"
 #include "EZ/Graphics.h"
 #include "EZ/EZ.h"
+
 #include <Xm/Xm.h>
 #include <string>
 #include <vector>
 
 using namespace std;
 
-class OutlineViewDelegate
+class OutlineDelegate
 {
 public:
-    OutlineViewDelegate();
-    virtual ~OutlineViewDelegate();
+    OutlineDelegate();
+    virtual ~OutlineDelegate();
 
 private:
     int _heightOfRow;

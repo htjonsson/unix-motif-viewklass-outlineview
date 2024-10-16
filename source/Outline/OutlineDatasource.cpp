@@ -7,14 +7,14 @@ OutlineDatasource::add(OutlineNode* child)
 }
 
 void
-OutlineDatasource::add(OutlineNode* parent, OutlilneNode* child)
+OutlineDatasource::add(OutlineNode* parent, OutlineNode* child)
 {
 	_nodes.push_back(child);
-	child.setParent(parent);
+	// _child.setParent(parent);
 }
 
 void
-OutlineDatasource::Update()
+OutlineDatasource::update()
 {
     for(int i = +1; i < _nodes.size(); i++)
     {
@@ -29,15 +29,15 @@ OutlineDatasource::Update()
 }
 
 int 
-OutlineDatasource::listOfVisible(vector<OutlineNode*> result)
+OutlineDatasource::listOfVisible(std::vector<OutlineNode*>* result)
 {
 	for(OutlineNode* node : _nodes)
 	{
 		if (node->isVisible() == true)
-			result.push_back(node);
+			result->push_back(node);
 	}
 
-	return result.size();
+	return result->size();
 }
 
 int 
@@ -45,7 +45,7 @@ OutlineDatasource::indexOf(OutlineNode* node)
 {
 	for (int i = 0; i < _nodes.size(); i++)
 	{
-		OutlineNode* current = _nodes.at(index);
+		OutlineNode* current = _nodes.at(i);
 
 		if (current == node)
 			return i;
@@ -62,7 +62,7 @@ OutlineDatasource::isLeaf(int index)
 		OutlineNode* next = _nodes.at(index+1);
 		OutlineNode* current = _nodes.at(index);
 
-		if (current->level > next.level)
+		if (current->level() > next->level())
 			return false;
 	}
 	return true;
@@ -89,7 +89,7 @@ OutlineDatasource::hideChildren(int index)
 	{
 		OutlineNode* next = _nodes.at(i);
 
-		if (current->level <= next->level)
+		if (current->level() <= next->level())
 			break;
 
 		next->setVisible(false);
@@ -117,7 +117,7 @@ OutlineDatasource::showChildren(int index)
 	{
 		OutlineNode* next = _nodes.at(i);
 
-		if (current->level + 1 == next->level)
+		if (current->level() + 1 == next->level())
 			break;
 
 		next->setVisible(true);

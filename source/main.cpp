@@ -34,7 +34,7 @@ int main ( int argc, char **argv )
     // Set a default size of window as 800x600
     XtVaSetValues(win->mainWindowWidget(), XmNwidth, 800, XmNheight, 600, NULL);
 
-    OutlineDatasource datasource = panel.datasource();
+    OutlineDatasource* datasource = panel.datasource();
 
     if (datasource)
     {
@@ -50,7 +50,7 @@ int main ( int argc, char **argv )
         OutlineNode* n10 = new OutlineNode(3, "Subitem 2B/ii/a)");
         OutlineNode* n11 = new OutlineNode(3, "Subitem 2B/ii/b)");
         OutlineNode* n12 = new OutlineNode(2, "Item 2B/iii)");
-        OutlineNode* n13 = new OutlineNode(1. "Subheading 2C");
+        OutlineNode* n13 = new OutlineNode(1, "Subheading 2C");
         OutlineNode* n14 = new OutlineNode(0, "Heading 3");
         OutlineNode* n15 = new OutlineNode(1, "Subheading 3A");
         OutlineNode* n16 = new OutlineNode(1, "Subheading 3B");
