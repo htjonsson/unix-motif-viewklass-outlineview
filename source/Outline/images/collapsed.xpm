@@ -1,5 +1,5 @@
 /* XPM */
-static const char *xpm_untoggled[] = {
+static const char *xpm_collapsed[] = {
 /* columns rows colors chars-per-pixel */
 "12 13 102 2 ",
 "   c black",

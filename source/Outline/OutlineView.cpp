@@ -26,6 +26,9 @@ OutlineView::~OutlineView()
 {
     if (_delegate != NULL)
         delete _delegate;
+
+    if (_datasource != NULL)
+        delete _datasource;
 }
 
 void OutlineView::createWidget(const char *name, Widget parent)
@@ -49,7 +52,7 @@ void OutlineView::createWidget(const char *name, Widget parent)
                                                  xmScrollBarWidgetClass, _baseWidget,
                                                  XmNorientation, XmVERTICAL,
                                                  XmNminimum, 0,
-                                                 XmNmaximum, _numberOfRows,
+                                                 XmNmaximum, 1,
                                                   NULL);
 
     // --------------------------------------------------------------------------
@@ -57,7 +60,6 @@ void OutlineView::createWidget(const char *name, Widget parent)
     _horizontalScrollbar = XtVaCreateManagedWidget("list_view_panel_horizontal_scrollbar",
                                                    xmScrollBarWidgetClass, _baseWidget,
                                                    XmNorientation, XmHORIZONTAL,
-                                                   XmNmaximum, 1,
                                                    NULL);
 
     // --------------------------------------------------------------------------
@@ -131,7 +133,13 @@ OutlineView::setNumberOfRows(int numberOfRows)
 void
 OutlineView::update()
 {
-    setNumberOfRows(_datasource->numberOfRows());  
+    if (_datasource)
+    {
+        _datasource.update();
+
+        setNumberOfRows(_datasource->numberOfRows());
+    }
+        
 }
 
 // ------------------------------------------------------------------------------------------------------------------------
@@ -203,10 +211,11 @@ OutlineView::redraw(Window window)
         XtWarning("Datasource not found");
         return;
     }
+
     int hightOfRow = _delegate->heightOfRow();
 
-    std::cout << "[numberOfRows] " << _numberOfRows << std::endl;
-    std::cout << "[offsetRows] " << _offsetRows << std::endl;
+    // std::cout << "[numberOfRows] " << _numberOfRows << std::endl;
+    // std::cout << "[offsetRows] " << _offsetRows << std::endl;
 
     std::vector<OutlineNode*> nodes;
     _datasource->listOfVisible(&nodes);
@@ -357,13 +366,22 @@ OutlineView::handleButton1Pressed(XButtonPressedEvent* event)
         {
             OutlineNode* node = nodes.at(rowId);
 
-            if(_delegate->handleRowSelected(node))
-            {
-                _datasource->update();
+            if(_delegate->handleRowSelected(node, _datasource))
                 redraw(XtWindow(_drawingArea));
-            }
         }
     }    
+}
+
+void
+OutlineView::handleButton4Pressed(XButtonPressedEvent* event)
+{
+    cout << "handleButton4Pressed" << endl;
+}
+
+void
+OutlineView::handleButton5Pressed(XButtonPressedEvent* event)
+{
+    cout << "handleButton5Pressed" << endl;
 }
 
 void 
@@ -378,8 +396,8 @@ OutlineView::handleButtonPressed(XButtonPressedEvent* event)
         case Button1: handleButton1Pressed(event); break;
         // case Button2: cout << "Button2" << endl; break;
         // case Button3: cout << "Button3" << endl; break;
-        // case Button4: cout << "Button4" << endl; break;
-        // case Button5: cout << "Button5" << endl; break;
+        case Button4: handleButton4Pressed(event); break;
+        case Button5: handleButton5Pressed(event); break;
         default: break;
     }
 }

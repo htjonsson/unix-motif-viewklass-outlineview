@@ -3,20 +3,14 @@
 void
 OutlineDatasource::add(OutlineNode* child)
 {
-	_nodes.push_back(child);
-}
-
-void
-OutlineDatasource::add(OutlineNode* parent, OutlineNode* child)
-{
-	_nodes.push_back(child);
-	child->setHasChildren(true);
-	// child.setParent(parent);
+	parent->setHasChildren(false);
+    _nodes.push_back(child);    
 }
 
 void
 OutlineDatasource::update()
 {
+    // Check if node has a child and then assign it, if not already set
     for(int i = 1; i < _nodes.size(); i++)
     {
 		OutlineNode* current = _nodes.at(i-1);
@@ -27,7 +21,7 @@ OutlineDatasource::update()
         else
             current->setHasChildren(false);
     }
-
+    
 	for(int i = 0; i < _nodes.size(); i++)
 		setVisibilityBy(_nodes.at(i));
 }
@@ -110,7 +104,7 @@ OutlineDatasource::isLeaf(int index)
 }
 
 void 
-OutlineDatasource::hideChildren(OutlineNode* node)
+OutlineDatasource::makeChildrenNonVisible(OutlineNode* node)
 {
 	int index = indexOf(node);
 
@@ -119,7 +113,7 @@ OutlineDatasource::hideChildren(OutlineNode* node)
 }
 
 void 
-OutlineDatasource::hideChildren(int index)
+OutlineDatasource::makeChildrenNonVisible(int index)
 {
 	if (isLeaf(index) == true)
 		return;
@@ -138,7 +132,7 @@ OutlineDatasource::hideChildren(int index)
 }
 
 void 
-OutlineDatasource::showChildren(OutlineNode* node)
+OutlineDatasource::makeChildrenVisible(OutlineNode* node)
 {
 	int index = indexOf(node);
 
@@ -147,7 +141,7 @@ OutlineDatasource::showChildren(OutlineNode* node)
 }
 
 void 
-OutlineDatasource::showChildren(int index)
+OutlineDatasource::makeChildrenVisible(int index)
 {
 	if (isLeaf(index) == true)
 		return;
@@ -169,4 +163,13 @@ int
 OutlineDatasource::numberOfRows()
 {
     return _nodes.size();
+}
+
+void 
+printOut()
+{
+    for(OutlineNode* node : _nodes)
+    {
+        note->printOut();
+    }
 }

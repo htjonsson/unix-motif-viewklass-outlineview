@@ -2,6 +2,8 @@
 #define OUTLINE_DELEGATE_H
 
 #include "OutlineNode.h"
+#include "OutlineDatasource.h"
+
 #include "EZ/Graphics.h"
 #include "EZ/EZ.h"
 
@@ -38,7 +40,7 @@ public:
     void setHeightOfRow(int heightOfRow);
 
 public:
-    virtual bool handleRowSelected(OutlineNode* node);
+    virtual bool handleRowSelected(OutlineNode* node, OutlineDatasource* datasource);
     virtual bool handleCollapse(OutlineNode* node);
     virtual bool handleExpanded(OutlineNode* node);
 

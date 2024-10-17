@@ -76,8 +76,6 @@ int main ( int argc, char **argv )
         datasource->add(n17);
         datasource->add(n18);
 
-        datasource->update();
-
         panel.update();
     }
 

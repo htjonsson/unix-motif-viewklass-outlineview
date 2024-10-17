@@ -16,7 +16,6 @@ private:
 	bool			_visible = false;
 	int  			_level = 0;
     bool            _hasChildren = false;
-	OutlineNode*	_parent;
 
 public:
 	OutlineNode(int level, std::string name);
@@ -26,10 +25,6 @@ public:
 public:
 	bool isExpanded();
 	void setExtended(bool isExpanded);
-
-public:
-	OutlineNode* parent();
-	void setParent(OutlineNode* newParent);
 
 public:
 	XtPointer clientData();
@@ -52,6 +47,9 @@ public:
 public:
     bool hasChildren();
     void setHasChildren(bool hasChildren);
+
+public:
+    void printOut();
 };
 
 #endif // OUTLINE_NODE_H

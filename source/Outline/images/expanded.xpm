@@ -1,5 +1,5 @@
 /* XPM */
-static const char* xpm_toggled[] = {
+static const char* xpm_expanded[] = {
 /* columns rows colors chars-per-pixel */
 "12 21 150 2 ",
 "   c #000002",

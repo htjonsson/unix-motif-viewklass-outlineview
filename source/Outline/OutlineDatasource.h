@@ -12,8 +12,7 @@ private:
 	std::vector<OutlineNode*> _nodes;
 
 public:
-	void add(OutlineNode* child);
-	void add(OutlineNode* parent, OutlineNode* child);
+	void add(OutlineNode* node);
 
 public:
 	int listOfVisible(std::vector<OutlineNode*>* result);
@@ -27,18 +26,21 @@ private:
 	bool isLeaf(int index);
 
 public:
-	void hideChildren(OutlineNode* node);
-	void hideChildren(int index);
+	void makeChildrenNonVisible(OutlineNode* node);
+	void makeChildrenNonVisible(int index);
 
 public:
-	void showChildren(OutlineNode* node);
-	void showChildren(int index);
+	void makeChildrenVisible(OutlineNode* node);
+	void makeChildrenVisible(int index);
 
 public:
     int numberOfRows();
 
 public:
 	void update();
+
+public:
+    void printOut();
 };
 
 #endif // OUTLINE_VIEW_H

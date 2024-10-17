@@ -70,18 +70,6 @@ OutlineNode::name()
 	return _name;
 }
 
-OutlineNode* 
-OutlineNode::parent()
-{
-	return _parent;
-}
-
-void 
-OutlineNode::setParent(OutlineNode* newParent)
-{
-	_parent = newParent;
-}
-
 XtPointer 
 OutlineNode::clientData()
 {
@@ -104,4 +92,10 @@ void
 OutlineNode::setHasChildren(bool hasChildren)
 {
     _hasChildren = hasChildren;
+}
+
+void
+OutlineNode::printOut()
+{
+    std::cout << "label: " << _label << " level: " << _level << " visible: " << _visible << " expanded: " << _expaned << " hasChildren: " << _hasChildren << std::endl;
 }

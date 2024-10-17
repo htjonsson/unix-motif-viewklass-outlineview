@@ -8,8 +8,8 @@
 #include <ostream>
 #include <sstream>
 
-#include "images/toggled.xpm"
-#include "images/untoggled.xpm"
+#include "images/expanded.xpm"
+#include "images/collapsed.xpm"
 
 using namespace std;
 
@@ -45,7 +45,7 @@ OutlineDelegate::heightOfRow()
  }
 
 bool
-OutlineDelegate::handleRowSelected(OutlineNode* node)
+OutlineDelegate::handleRowSelected(OutlineNode* node, OutlineDatasource* datasource)
 {    
     std::cout << "handleRowSelected" << std::endl;
 
@@ -54,15 +54,15 @@ OutlineDelegate::handleRowSelected(OutlineNode* node)
         if (node->isExpanded())
         {
             node->setExtended(false);
-            // _nodes[rowId] = node;
-            // node->printOut();
+            datasource->makeChildrenNonVisible(node);
+
             return handleExpanded(node);   
         }
         else
         {
-            node->setExtended(true);   
-            // nodes[rowId] = node;
-            // node->printOut();
+            node->setExtended(true);
+            datasource->makeChildrenVisible(node);
+
             return handleCollapse(node);
         }               
     }
@@ -96,8 +96,8 @@ OutlineDelegate::handleExpanded(OutlineNode* node)
 void
 OutlineDelegate::initImages(Graphics* g)
 {
-    g->getPixmapByName("toggled", xpm_toggled);
-    g->getPixmapByName("untoggled", xpm_untoggled);
+    g->getPixmapByName("expanded", xpm_expanded);
+    g->getPixmapByName("collapsed", xpm_collapsed);
 }
 
 void 
@@ -123,14 +123,14 @@ OutlineDelegate::draw(OutlineNode* node, Graphics* g, XRectangle rectangle)
         if (node->isExpanded()) 
         {
             rect = EZ::ofRectangle(rectangle, 6 + indentWidth, 0, 12, 21);
-            g->draw("toggled", rect);  
-            std::cout << "toggled" << std::endl;
+            g->draw("expanded", rect);  
+            std::cout << "expanded" << std::endl;
         }
         else
         {
             rect = EZ::ofRectangle(rectangle, 6 + indentWidth, 0, 12, 13);
-            g->draw("untoggled", rect); 
-            std::cout << "untoggled" << std::endl;              
+            g->draw("collapsed", rect); 
+            std::cout << "collapsed" << std::endl;              
         }
     }                       
 }

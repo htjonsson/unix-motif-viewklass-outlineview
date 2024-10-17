@@ -81,7 +81,11 @@ private:
     void handleResize(Window window);   
     void handleEvent(XEvent* event);  
     void handleButtonPressed(XButtonPressedEvent* event);
+
+private:
     void handleButton1Pressed(XButtonPressedEvent* event);
+    void handleButton4Pressed(XButtonPressedEvent* event);
+    void handleButton5Pressed(XButtonPressedEvent* event);
 
 private:
     static void inputCallback(Widget widget, XtPointer clientData, XtPointer callData);
