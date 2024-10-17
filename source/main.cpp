@@ -42,7 +42,7 @@ int main ( int argc, char **argv )
         OutlineNode* n2  = new OutlineNode(1, "Subheading 1A");
         OutlineNode* n3  = new OutlineNode(1, "Subheading 1B");
         OutlineNode* n4  = new OutlineNode(1, "Subheading 1C");
-        OutlineNode* n5  = new OutlineNode(0, "Heading");
+        OutlineNode* n5  = new OutlineNode(0, "Heading 2");
         OutlineNode* n6  = new OutlineNode(1, "Subheading 2A");
         OutlineNode* n7  = new OutlineNode(1, "Subheading 2B");
         OutlineNode* n8  = new OutlineNode(2, "Item 2B/i)");
@@ -55,6 +55,7 @@ int main ( int argc, char **argv )
         OutlineNode* n15 = new OutlineNode(1, "Subheading 3A");
         OutlineNode* n16 = new OutlineNode(1, "Subheading 3B");
         OutlineNode* n17 = new OutlineNode(1, "Subheading 3C");
+        OutlineNode* n18 = new OutlineNode(0, "Heading 4");
 
         datasource->add(n1);
         datasource->add(n2);
@@ -73,6 +74,9 @@ int main ( int argc, char **argv )
         datasource->add(n15);
         datasource->add(n16);
         datasource->add(n17);
+        datasource->add(n18);
+
+        datasource->update();
 
         panel.update();
     }

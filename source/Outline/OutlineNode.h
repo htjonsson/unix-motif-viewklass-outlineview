@@ -24,8 +24,8 @@ public:
 	~OutlineNode();
 
 public:
-	bool isExtended();
-	void setExtended(bool isExtended);
+	bool isExpanded();
+	void setExtended(bool isExpanded);
 
 public:
 	OutlineNode* parent();

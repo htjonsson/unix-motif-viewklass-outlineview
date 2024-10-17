@@ -46,36 +46,31 @@ OutlineDelegate::heightOfRow()
 
 bool
 OutlineDelegate::handleRowSelected(OutlineNode* node)
-{
-    /*
-    if (_nodes.size() > rowId)
+{    
+    std::cout << "handleRowSelected" << std::endl;
+
+    if (node->hasChildren())
     {
-        OutlineViewRenderNode* node = _nodes.at(rowId);
-
-        if (node->isToggle())
+        if (node->isExpanded())
         {
-            if (node->isCollapsed())
-            {
-                node->setExpended();
-                _nodes[rowId] = node;
-                node->printOut();
-                return handleExpanded(rowId);   
-            }
-            else
-            {
-                node->setCollapsed();   
-                _nodes[rowId] = node;
-                node->printOut();
-                return handleCollapse(rowId);
-            }               
+            node->setExtended(false);
+            // _nodes[rowId] = node;
+            // node->printOut();
+            return handleExpanded(node);   
         }
+        else
+        {
+            node->setExtended(true);   
+            // nodes[rowId] = node;
+            // node->printOut();
+            return handleCollapse(node);
+        }               
     }
-    */
-
+    
     // std::cout << "OutlineDelegate::rowSelected " << rowId << std::endl;
 
     // no need to redraw
-    return false; 
+    return true; 
 }
 
 bool 
@@ -90,6 +85,8 @@ bool
 OutlineDelegate::handleExpanded(OutlineNode* node)
 {
     std::cout << "isExpanded" << std::endl;
+
+
 
     return true;
 }
@@ -120,10 +117,10 @@ OutlineDelegate::draw(OutlineNode* node, Graphics* g, XRectangle rectangle)
                     rect,
                     node->label());
     // image
-    //if (node->isToggle())
-    //{
-        /*
-        if (node->isExpended()) 
+    if (node->hasChildren())
+    {
+        std::cout << "OutlineDelegate::" << "hasChildren" << std::endl;
+        if (node->isExpanded()) 
         {
             rect = EZ::ofRectangle(rectangle, 6 + indentWidth, 0, 12, 21);
             g->draw("toggled", rect);  
@@ -135,7 +132,6 @@ OutlineDelegate::draw(OutlineNode* node, Graphics* g, XRectangle rectangle)
             g->draw("untoggled", rect); 
             std::cout << "untoggled" << std::endl;              
         }
-        */
-    //}                       
+    }                       
 }
  

@@ -19,6 +19,10 @@ public:
 	int listOfVisible(std::vector<OutlineNode*>* result);
 
 private:
+	int childrenOf(OutlineNode* parent, std::vector<OutlineNode*>* result);
+	void setVisibilityBy(OutlineNode* parent);
+
+private:
 	int indexOf(OutlineNode* node);
 	bool isLeaf(int index);
 

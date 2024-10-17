@@ -358,7 +358,10 @@ OutlineView::handleButton1Pressed(XButtonPressedEvent* event)
             OutlineNode* node = nodes.at(rowId);
 
             if(_delegate->handleRowSelected(node))
+            {
+                _datasource->update();
                 redraw(XtWindow(_drawingArea));
+            }
         }
     }    
 }

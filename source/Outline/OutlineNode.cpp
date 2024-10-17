@@ -53,15 +53,15 @@ OutlineNode::setLevel(int level)
 }	
 
 bool 
-OutlineNode::isExtended()
+OutlineNode::isExpanded()
 {
 	return _expanded;
 }
 
 void 
-OutlineNode::setExtended(bool isExtended = true)
+OutlineNode::setExtended(bool isExpanded = true)
 {
-	_expanded = isExtended;
+	_expanded = isExpanded;
 }
 
 std::string
